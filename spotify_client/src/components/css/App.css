@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+  background-color: black;
+  height: 100vh;
+  max-width: 100%;
+  margin: 0;
+}
+
+div, button {
+  margin-top: 50vh;
+}
+
+.btn {
+  background-color: #1DB954;
+  border-radius: 15px;
+}
