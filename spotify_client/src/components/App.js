@@ -1,98 +1,18 @@
-// import React, { Component } from 'react';
-// import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
-// import Login from './Login';
-// import Home from './Home';
-
-// export default class App extends Component {
-//     render() {
-//         return (
-//             <Router>
-//                 <Switch>
-//                     <Route exact path='/:anything?' component={Login} />
-//                     {/* <Route exact path='/home/:anything' component={Home} /> */}
-//                 </Switch>
-//             </Router>
-//         )
-//     }
-// };
-
 import React, { Component } from 'react';
-import './css/App.css';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-import SpotifyWebApi from 'spotify-web-api-js';
-const spotifyApi = new SpotifyWebApi();
+import Login from './Login';
+import Home from './Home';
 
-class App extends Component {
-    constructor() {
-        super();
-        const params = this.getHashParams();
-        const token = params.access_token;
-        if (token) {
-            spotifyApi.setAccessToken(token);
-        }
-        this.state = {
-            loggedIn: token ? true : false,
-            nowPlaying: { name: 'Not Checked', albumArt: '' }
-        }
-    }
-    
-    getHashParams() {
-        var hashParams = {};
-        var e, r = /([^&;=]+)=?([^&;]*)/g,
-            q = window.location.hash.substring(1);
-        e = r.exec(q)
-        while (e) {
-            hashParams[e[1]] = decodeURIComponent(e[2]);
-            e = r.exec(q);
-        }
-        console.log(hashParams)
-        return hashParams;
-    }
-
-    async getNowPlaying() {
-        try {
-            let result = await spotifyApi.getMyCurrentPlaybackState();
-            console.log(result)
-            this.setState({
-                nowPlaying: {
-                    name: result.item.name,
-                    albumArt: result.item.album.images[0].url
-                }
-            })
-        } catch (e) {
-            console.log(e)
-        }
-        // spotifyApi.getMyCurrentPlaybackState()
-        //     .then((response) => {
-        //         this.setState({
-        //             nowPlaying: {
-        //                 name: response.item.name,
-        //                 albumArt: response.item.album.images[0].url
-        //             }
-        //         });
-        //     })
-    }
+export default class App extends Component {
     render() {
         return (
-            <div className="App">
-                <a href='http://localhost:8888'>
-                    <button className='btn'>Login to Spotify</button> 
-                </a>
-                <div>
-                    Now Playing: {this.state.nowPlaying.name}
-                </div>
-                <div>
-                    <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }} />
-                </div>
-                {this.state.loggedIn &&
-                    <button onClick={() => this.getNowPlaying()}>
-                        Check Now Playing
-                    </button>
-                }
-            </div>
-        );
+            <Router>
+                <Switch>
+                    <Route exact path='/' component={Login} />
+                    <Route exact path='/home/:anything?' component={Home} />
+                </Switch>
+            </Router>
+        )
     }
-}
-
-export default App;
+};

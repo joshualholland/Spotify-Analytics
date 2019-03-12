@@ -1,4 +1,4 @@
-.App {
+.Login {
   text-align: center;
   background-color: black;
   height: 100vh;
@@ -6,11 +6,8 @@
   margin: 0;
 }
 
-div, button {
-  margin-top: 50vh;
-}
-
-.btn {
+.loggin-button {
   background-color: #1DB954;
   border-radius: 15px;
+  margin-top: 50vh;
 }
