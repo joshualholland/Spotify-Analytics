@@ -1,12 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './css/Login.css';
 
-class Login extends Component {
-  constructor() {
-    super();
-  }
-
-  render() {
+const Login = () => {
     return (
       <div className="Login">
         <a href='http://localhost:8888'>
@@ -14,7 +9,6 @@ class Login extends Component {
         </a>
       </div>
     );
-  }
 }
 
 export default Login;

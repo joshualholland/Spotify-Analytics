@@ -8,32 +8,6 @@ const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const spotifyApi = new SpotifyWebApi();
 
-const options = {
-    theme: "dark2",
-    animationEnabled: true,
-    exportFileName: "New Year Resolutions",
-    exportEnabled: true,
-    title:{
-        text: "Top Categories of New Year's Resolution"
-    },
-    data: [{
-        type: "pie",
-        showInLegend: true,
-        legendText: "{label}",
-        toolTipContent: "{label}: <strong>{y}%</strong>",
-        indexLabel: "{y}%",
-        indexLabelPlacement: "inside",
-        dataPoints: [
-            { y: 32, label: "Health" },
-            { y: 22, label: "Finance" },
-            { y: 15, label: "Education" },
-            { y: 19, label: "Career" },
-            { y: 5, label: "Family" },
-            { y: 7, label: "Real Estate" }
-        ]
-    }]
-}
-
 class Home extends Component {
     constructor() {
         super();
@@ -44,7 +18,23 @@ class Home extends Component {
         }
         this.state = {
             loggedIn: token ? true : false,
-            nowPlaying: { name: 'Not Checked', albumArt: '' }
+            nowPlaying: { name: 'Not Checked', albumArt: '' },
+            me: { 
+                display_name: null, 
+                profile_img: null, 
+                followers: null
+            },
+            genres: {
+                rock: null,
+                rap: null,
+                soul: null,
+                folk: null,
+                indie: null,
+                classics: null,
+                country: null,
+                electronic: null,
+                other: null
+            }
         }
     }
 
@@ -61,36 +51,129 @@ class Home extends Component {
         return hashParams;
     }
 
-    async getNowPlaying() {
+    async componentDidMount() {
         try {
-            let result = await spotifyApi.getMyCurrentPlaybackState();
-            console.log(result)
+            let song = await spotifyApi.getMyCurrentPlaybackState();
             this.setState({
                 nowPlaying: {
-                    name: result.item.name,
-                    albumArt: result.item.album.images[0].url
+                    name: song.item.name,
+                    albumArt: song.item.album.images[0].url
                 }
-            })
+            });
+
+            let me = await spotifyApi.getMe();
+            this.setState({
+                me: {
+                    display_name: me.display_name,
+                    profile_img: me.images[0].url,
+                    followers: me.followers.total
+                }
+            });
+
+            let genres = await spotifyApi.getMyTopArtists();
+            console.log(genres)
+            let n = 20;
+            let rockArray = [];
+            let popArray = [];
+            let rapArray = [];
+            let soulArray = [];
+            let folkArray = [];
+            let indieArray = [];
+            let classicsArray = [];
+            let countryArray = [];
+            let electronicArray = [];
+            let otherArray = [];
+            for(let i=0; i < n; i++) {
+                genres.items[i].genres.forEach(genre => {
+                    console.log(genre);
+                    if (genre.includes('rock') || genre.includes('metal') || genre.includes('post-grunge') || genre.includes('alternative') || genre.includes('punk')) {
+                        rockArray.push(genre)
+                    } else if (genre.includes('hip hop') || genre.includes('rap')) {
+                        rapArray.push(genre)
+                    } else if (genre.includes('pop')) {
+                        popArray.push(genre)
+                    } else if (genre.includes('soul')) {
+                        soulArray.push(genre)
+                    } else if (genre.includes('folk') || genre.includes('americana') || genre.includes('indiecoustica')) {
+                        folkArray.push(genre)
+                    } else if (genre.includes('indie') || genre.includes('singer-songwriter')) {
+                        indieArray.push(genre)
+                    } else if (genre.includes('adult standards') || genre.includes('classic')) {
+                        classicsArray.push(genre)
+                    } else if (genre.includes('country') || genre.includes('bluegrass') || genre.includes('holler')) {
+                        countryArray.push(genre)
+                    } else if (genre.includes('mellow') || genre.includes('house') || genre.includes('wave') || genre.includes('escape')) {
+                        electronicArray.push(genre)
+                    } else (
+                        otherArray.push(genre)
+                    )
+                });
+            };
+
+            this.setState({
+                genres: {
+                    rock: rockArray.length,
+                    rap: rapArray.length,
+                    soul: soulArray.length,
+                    folk: folkArray.length,
+                    indie: indieArray.length,
+                    classics: classicsArray.length,
+                    country: countryArray.length,
+                    electronic: electronicArray.length,
+                    other: otherArray.length
+                }
+            });
+
+            console.log(otherArray)
+            console.log(rapArray)
         } catch (e) {
             console.log(e)
         }
     }
 
     render() {
+        const options = {
+            theme: "dark2",
+            animationEnabled: true,
+            exportFileName: "Top Genres",
+            exportEnabled: true,
+            title:{
+                text: "Top Genres from your library"
+            },
+            data: [{
+                type: "pie",
+                showInLegend: true,
+                legendText: "{label}",
+                toolTipContent: "{label}: <strong>{y}%</strong>",
+                indexLabel: "{y}%",
+                indexLabelPlacement: "inside",
+                dataPoints: [
+                    { y: this.state.genres.rock, label: "Rock" },
+                    { y: this.state.genres.rap, label: "Hip Hop" },
+                    { y: this.state.genres.indie, label: "Indie" },
+                    { y: this.state.genres.folk, label: "Folk" },
+                    { y: this.state.genres.soul, label: "Soul" },
+                    { y: this.state.genres.classics, label: "Classics" },
+                    { y: this.state.genres.country, label: "Country"},
+                    { y: this.state.genres.electronic, label: "Electronic"},
+                    { y: this.state.genres.other, label: "Other"}
+                ]
+            }]
+        }
+
         return (
             <div className="Home">
+                <div className='me'>
+                    <img className='me-pic' alt='profile image' src={this.state.me.profile_img} />
+                </div>
                 <div className='card bg-dark' style={{width: 18 + 'rem'}}>
                     <img className='card-img-top' src={this.state.nowPlaying.albumArt} />
                     <div className='card-title text-white'>
                         {this.state.nowPlaying.name}
                     </div>
-                    {this.state.loggedIn &&
-                        <button className='btn btn-success' onClick={() => this.getNowPlaying()}>
-                            Check Now Playing
-                    </button>
-                    }
+                    <div className='card-subtitle text-muted'>Now Playing</div>
                 </div>
-                <div>
+                <div className='w-50'>
                     <CanvasJSChart options={options} />
                 </div>
             </div>
