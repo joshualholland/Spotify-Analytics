@@ -18,10 +18,15 @@ class Home extends Component {
         }
         this.state = {
             loggedIn: token ? true : false,
-            nowPlaying: { name: 'Not Checked', albumArt: '' },
-            me: { 
-                display_name: null, 
-                profile_img: null, 
+            nowPlaying: { 
+                name: 'Not Checked', 
+                albumArt: '', 
+                artist: null,
+                url: null
+            },
+            me: {
+                display_name: null,
+                profile_img: null,
                 followers: null
             },
             genres: {
@@ -34,7 +39,7 @@ class Home extends Component {
                 country: null,
                 electronic: null,
                 other: null
-            }
+            },
         }
     }
 
@@ -57,9 +62,12 @@ class Home extends Component {
             this.setState({
                 nowPlaying: {
                     name: song.item.name,
-                    albumArt: song.item.album.images[0].url
+                    albumArt: song.item.album.images[0].url,
+                    artist: song.item.artists[0].name,
+                    url: song.item.external_urls.spotify
                 }
             });
+            console.log(song.item.external_urls.spotify)
 
             let me = await spotifyApi.getMe();
             this.setState({
@@ -71,7 +79,6 @@ class Home extends Component {
             });
 
             let genres = await spotifyApi.getMyTopArtists();
-            console.log(genres)
             let n = 20;
             let rockArray = [];
             let popArray = [];
@@ -83,9 +90,8 @@ class Home extends Component {
             let countryArray = [];
             let electronicArray = [];
             let otherArray = [];
-            for(let i=0; i < n; i++) {
+            for (let i = 0; i < n; i++) {
                 genres.items[i].genres.forEach(genre => {
-                    console.log(genre);
                     if (genre.includes('rock') || genre.includes('metal') || genre.includes('post-grunge') || genre.includes('alternative') || genre.includes('punk')) {
                         rockArray.push(genre)
                     } else if (genre.includes('hip hop') || genre.includes('rap')) {
@@ -123,9 +129,6 @@ class Home extends Component {
                     other: otherArray.length
                 }
             });
-
-            console.log(otherArray)
-            console.log(rapArray)
         } catch (e) {
             console.log(e)
         }
@@ -137,7 +140,7 @@ class Home extends Component {
             animationEnabled: true,
             exportFileName: "Top Genres",
             exportEnabled: true,
-            title:{
+            title: {
                 text: "Top Genres from your library"
             },
             data: [{
@@ -154,28 +157,40 @@ class Home extends Component {
                     { y: this.state.genres.folk, label: "Folk" },
                     { y: this.state.genres.soul, label: "Soul" },
                     { y: this.state.genres.classics, label: "Classics" },
-                    { y: this.state.genres.country, label: "Country"},
-                    { y: this.state.genres.electronic, label: "Electronic"},
-                    { y: this.state.genres.other, label: "Other"}
+                    { y: this.state.genres.country, label: "Country" },
+                    { y: this.state.genres.electronic, label: "Electronic" },
+                    { y: this.state.genres.other, label: "Other" }
                 ]
             }]
         }
 
         return (
             <div className="Home">
-                <div className='me'>
+                <div className='me p-5'>
                     <img className='me-pic' alt='profile image' src={this.state.me.profile_img} />
-                </div>
-                <div className='card bg-dark' style={{width: 18 + 'rem'}}>
-                    <img className='card-img-top' src={this.state.nowPlaying.albumArt} />
-                    <div className='card-title text-white'>
-                        {this.state.nowPlaying.name}
+                    <div className='me-text'>
+                        <h3 className='text-white'>{this.state.me.display_name}</h3>
+                        <h5 className='text-white'>Followers: {this.state.me.followers}</h5>
                     </div>
-                    <div className='card-subtitle text-muted'>Now Playing</div>
                 </div>
-                <div className='w-50'>
+                <div className='genre-chart'>
                     <CanvasJSChart options={options} />
                 </div>
+                <footer className='fixed-bottom'>
+                    <div className='song-container'>
+                        <img className='song-img m-3' src={this.state.nowPlaying.albumArt} />
+                        <div className='song-title'>
+                            {this.state.nowPlaying.name}
+                            <div className='song-artist'>
+                                {this.state.nowPlaying.artist}
+                            </div>
+                        </div>
+                    </div>
+                    <div className='player text-center'>
+                        <audio controls src={this.state.nowPlaying.url}>
+                        </audio>
+                    </div>
+                </footer>
             </div>
 
         );
