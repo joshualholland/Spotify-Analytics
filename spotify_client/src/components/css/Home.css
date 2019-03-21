@@ -11,10 +11,36 @@
 
 .me-pic {
     border-radius: 50%;
+    display: inline-block;
+}
+
+.me-text {
+    display: inline-block;
+}
+
+li:active {
+    border-bottom: solid darkorange;
+}
+
+li {
+    color: darkorange;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px; 
+}
+
+li:hover {
+    cursor: pointer;
+    color: darkorange;
 }
 
 .genre-chart {
-    width: 50%;
+    width: 45%;
+    display: inline-block;
+}
+
+.decade-chart {
+    width: 45%;
+    display: inline-block;
 }
 
 footer {

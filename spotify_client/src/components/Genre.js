@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import CanvasJSReact from '../utils/canvasjs.react';
 import SpotifyWebApi from 'spotify-web-api-js';
 
-const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const spotifyApi = new SpotifyWebApi();
@@ -88,7 +87,7 @@ export default class Genre extends Component {
             exportFileName: "Top Genres",
             exportEnabled: true,
             title: {
-                text: "Top Genres from your library"
+                text: "Top Genres from Your Top Artists"
             },
             data: [{
                 type: "pie",
@@ -111,7 +110,7 @@ export default class Genre extends Component {
             }]
         }
         return (
-            <div className='genre-chart'>
+            <div className='genre-chart mr-2'>
                 <CanvasJSChart options={options} />
             </div>
         )

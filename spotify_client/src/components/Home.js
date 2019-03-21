@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './css/Home.css';
 import SpotifyWebApi from 'spotify-web-api-js';
 import Genre from './Genre';
+import Decades from './Decades';
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -16,11 +17,12 @@ class Home extends Component {
         }
         this.state = {
             loggedIn: token ? true : false,
-            nowPlaying: { 
-                name: 'Not Checked', 
-                albumArt: '', 
+            nowPlaying: {
+                name: 'Not Checked',
+                albumArt: '',
                 artist: null,
-                url: null
+                url: null,
+                id: null
             },
             me: {
                 display_name: null,
@@ -51,7 +53,8 @@ class Home extends Component {
                     name: song.item.name,
                     albumArt: song.item.album.images[0].url,
                     artist: song.item.artists[0].name,
-                    url: song.item.external_urls.spotify
+                    url: song.item.external_urls.spotify,
+                    id: song.item.id
                 }
             });
             console.log(song.item.external_urls.spotify)
@@ -64,6 +67,9 @@ class Home extends Component {
                     followers: me.followers.total
                 }
             });
+
+            let audio = await spotifyApi.getAudioAnalysisForTrack(this.state.nowPlaying.id);
+            console.log(audio)
         } catch (e) {
             console.log(e)
         }
@@ -73,16 +79,22 @@ class Home extends Component {
         return (
             <div className="Home">
                 <div className='me p-5'>
-                    <img className='me-pic' alt='profile image' src={this.state.me.profile_img} />
+                    <img className='me-pic mr-3' alt='profile' src={this.state.me.profile_img} />
                     <div className='me-text'>
                         <h3 className='text-white'>{this.state.me.display_name}</h3>
                         <h5 className='text-white'>Followers: {this.state.me.followers}</h5>
                     </div>
                 </div>
-                <Genre />
+                <ul className='genre-button list-unstyled'>
+                    <li className='genre'>Analytics</li>
+                </ul>
+                <div className='analytics text-center'>
+                    <Genre />
+                    <Decades />
+                </div>
                 <footer className='fixed-bottom'>
                     <div className='song-container'>
-                        <img className='song-img m-3' src={this.state.nowPlaying.albumArt} />
+                        <img className='song-img m-3' alt='album art' src={this.state.nowPlaying.albumArt} />
                         <div className='song-title'>
                             {this.state.nowPlaying.name}
                             <div className='song-artist'>
