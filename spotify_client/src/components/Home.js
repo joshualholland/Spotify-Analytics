@@ -3,6 +3,7 @@ import './css/Home.css';
 import SpotifyWebApi from 'spotify-web-api-js';
 import Genre from './Genre';
 import Decades from './Decades';
+import Other from './Other';
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -57,7 +58,6 @@ class Home extends Component {
                     id: song.item.id
                 }
             });
-            console.log(song.item.external_urls.spotify)
 
             let me = await spotifyApi.getMe();
             this.setState({
@@ -91,8 +91,9 @@ class Home extends Component {
                 <div className='analytics text-center'>
                     <Genre />
                     <Decades />
+                    <Other />
                 </div>
-                <footer className='fixed-bottom'>
+                <footer className='footer mt-5'>
                     <div className='song-container'>
                         <img className='song-img m-3' alt='album art' src={this.state.nowPlaying.albumArt} />
                         <div className='song-title'>

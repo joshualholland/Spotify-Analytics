@@ -25,7 +25,6 @@ export default class Decades extends Component {
     async componentDidMount() {
         try {
             let decades = await spotifyApi.getMyTopTracks();
-            console.log(decades);
             let n = 20;
             let year = []
             let current = [];

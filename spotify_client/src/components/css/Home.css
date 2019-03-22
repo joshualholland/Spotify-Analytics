@@ -1,6 +1,6 @@
 .Home {
     background: linear-gradient(to bottom right,#6b5b95, black);
-    height: 100vh;
+    height: 100%;
     max-width: 100%;
     margin: 0;
 }
@@ -45,6 +45,9 @@ li:hover {
 
 footer {
     background-color: #212529;
+    bottom: 0;
+    position: relative;
+    height: 7em;
 }
 
 .song-container {
@@ -63,6 +66,19 @@ footer {
 }
 
 .song-artist {
+    color: white;
+}
+
+.card {
+    background-color: #212529;
+    display: inline-block;
+}
+
+hr {
+    background-color: darkorange;
+}
+
+.other-items {
     color: white;
 }
 
