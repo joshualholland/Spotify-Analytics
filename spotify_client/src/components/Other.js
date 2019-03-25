@@ -44,7 +44,7 @@ export default class Other extends Component {
 
     render() {
         return (
-            <div className='Other'>
+            <div className='Other mt-4'>
                 <div className='card' style={{ width: 45 + '%' }}>
                     <div className='card-body'>
                         <h3 className='card-title text-white'>Other Stats</h3>

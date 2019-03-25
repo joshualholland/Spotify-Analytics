@@ -6,31 +6,30 @@
 }
 
 .me {
-    display: inline-block;
+    max-width: 100%;
 }
 
 .me-pic {
     border-radius: 50%;
     display: inline-block;
+    height: 100px;
+    max-width: 100%;
 }
 
 .me-text {
+    float: right;
+    text-align: right;
+}
+
+.toggle {
+    color: rgb(255, 209, 2);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px; 
     display: inline-block;
 }
 
-li:active {
-    border-bottom: solid darkorange;
-}
-
-li {
-    color: darkorange;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 40px; 
-}
-
-li:hover {
-    cursor: pointer;
-    color: darkorange;
+.active, .toggle:hover {
+    color: rgb(255, 209, 2);
 }
 
 .genre-chart {
@@ -75,11 +74,43 @@ footer {
 }
 
 hr {
-    background-color: darkorange;
+    background-color: rgb(255, 209, 2);
 }
 
 .other-items {
     color: white;
+}
+
+.other-items::before {
+    content: "\2023";
+    color: #6b5b95;
+    margin-right: 1em;
+}
+
+#wrapper {
+    width: 640px;
+    margin: 10px auto;
+}
+
+#defaultbar {
+    width: 640px;
+    position: relative;
+    height: 10px;
+    background-color: #313131;
+}
+
+#progressbar {
+    position: absolute;
+    height: 10px;
+    background-color: white;
+    width: 0px;
+}
+
+#play {
+    background-color: #212529;
+    border: none;
+    height: 32px;
+    widows: 32px;
 }
 
 

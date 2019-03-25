@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './css/Home.css';
 import SpotifyWebApi from 'spotify-web-api-js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlayCircle, faPauseCircle } from '@fortawesome/free-regular-svg-icons';
+
 import Genre from './Genre';
 import Decades from './Decades';
 import Other from './Other';
@@ -22,14 +26,15 @@ class Home extends Component {
                 name: 'Not Checked',
                 albumArt: '',
                 artist: null,
-                url: null,
-                id: null
+                id: null,
             },
             me: {
                 display_name: null,
                 profile_img: null,
                 followers: null
             },
+            progress: null,
+            isPaused: false
         }
     }
 
@@ -49,16 +54,15 @@ class Home extends Component {
     async componentDidMount() {
         try {
             let song = await spotifyApi.getMyCurrentPlaybackState();
+            // console.log(song)
             this.setState({
                 nowPlaying: {
                     name: song.item.name,
                     albumArt: song.item.album.images[0].url,
                     artist: song.item.artists[0].name,
-                    url: song.item.external_urls.spotify,
                     id: song.item.id
                 }
             });
-
             let me = await spotifyApi.getMe();
             this.setState({
                 me: {
@@ -68,25 +72,62 @@ class Home extends Component {
                 }
             });
 
-            let audio = await spotifyApi.getAudioAnalysisForTrack(this.state.nowPlaying.id);
-            console.log(audio)
+            let test = await spotifyApi.getMyCurrentPlayingTrack();
+            this.setState({
+                progress: test.progress_ms
+            })
+            console.log(test)
+
+            // let audio = await spotifyApi.getAudioAnalysisForTrack(this.state.nowPlaying.id);
+            // console.log(audio)
         } catch (e) {
             console.log(e)
+        }
+    }
+
+    async pauseTrack() {
+        try {
+            await spotifyApi.pause()
+            this.setState({
+                isPaused: true
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async playTrack() {
+        try {
+            await spotifyApi.play()
+            this.setState({
+                isPaused: false
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    switchButtons() {
+        if(this.state.isPaused === false) {
+            return(<FontAwesomeIcon type='button' id='play' icon={faPauseCircle} size={"lg"} color={'white'} onClick={e => this.pauseTrack()}/>)
+        } else if(this.state.isPaused === true) {
+            return(<FontAwesomeIcon type='button' id='play' icon={faPlayCircle} size={"lg"} color={'white'} onClick={e => this.playTrack()}/>)
         }
     }
 
     render() {
         return (
             <div className="Home">
-                <div className='me p-5'>
-                    <img className='me-pic mr-3' alt='profile' src={this.state.me.profile_img} />
-                    <div className='me-text'>
+                <div className='me'>
+                    <img className='me-pic ml-3 mt-3' alt='profile' src={this.state.me.profile_img} />
+                    <div className='me-text mr-3 mt-3'>
                         <h3 className='text-white'>{this.state.me.display_name}</h3>
                         <h5 className='text-white'>Followers: {this.state.me.followers}</h5>
                     </div>
                 </div>
-                <ul className='genre-button list-unstyled'>
-                    <li className='genre'>Analytics</li>
+                <ul className='genre-button list-unstyled text-center'>
+                    <Link to='/home?:anything' className='toggle mr-4 active'>Analytics</Link>
+                    <Link to='/visualize' className='toggle ml-4'>Visualizer</Link>
                 </ul>
                 <div className='analytics text-center'>
                     <Genre />
@@ -103,9 +144,18 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className='player text-center'>
-                        <audio controls src={this.state.nowPlaying.url}>
+                    <div id='wrapper'>
+                        <audio id='mytrack'>
+
                         </audio>
+                        <div id='buttons'>
+                            {this.switchButtons()}
+                            <span className='text-white' id='currentTime'>0:00</span>/<span className='text-white' id='fullDuration'>0:00</span>
+                        </div>
+                        <div id='defaultbar'>
+                            <div id='progressbar'>
+                            </div>
+                        </div>
                     </div>
                 </footer>
             </div>

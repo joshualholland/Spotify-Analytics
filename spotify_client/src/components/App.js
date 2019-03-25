@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Login from './Login';
 import Home from './Home';
+import Visualizer from './Visualizer';
 
 export default class App extends Component {
     render() {
@@ -11,6 +12,7 @@ export default class App extends Component {
                 <Switch>
                     <Route exact path='/' component={Login} />
                     <Route exact path='/home/:anything?' component={Home} />
+                    <Route exact path='/visualize' component={Visualizer} />
                 </Switch>
             </Router>
         )
