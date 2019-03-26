@@ -110,7 +110,7 @@ export default class Genre extends Component {
             }]
         }
         return (
-            <div className='genre-chart mr-2'>
+            <div className='genre-chart'>
                 <CanvasJSChart options={options} />
             </div>
         )
