@@ -7,6 +7,7 @@ import { faPlayCircle, faPauseCircle } from '@fortawesome/free-regular-svg-icons
 
 import Carousel from './Carousel';
 import Logo from './svg/Logo';
+import Text from './svg/Text';
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -78,6 +79,10 @@ class Home extends Component {
                     followers: me.followers.total
                 }
             });
+
+            var path = document.querySelector("svg path");
+            var total_length = path.getTotalLength();
+            console.log(total_length)
         } catch (e) {
             console.log(e)
         }
@@ -117,10 +122,11 @@ class Home extends Component {
         return (
             <div className="Home">
             <Logo />
-                <ul className='genre-button list-unstyled text-center'>
+            {/* <Text /> */}
+                {/* <ul className='genre-button list-unstyled text-center'>
                     <Link to='/home?:anything' className='toggle mr-4 active'>Analytics</Link>
                     <Link to='/visualize' className='toggle ml-4'>Visualizer</Link>
-                </ul>
+                </ul> */}
                 <div className='analytics text-center'>
                     <Carousel />
                 </div>

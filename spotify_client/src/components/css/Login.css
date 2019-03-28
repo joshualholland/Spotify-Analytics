@@ -10,5 +10,33 @@
   size: 700px;
   background-color: #1DB954;
   border-radius: 15px;
-  margin-top: 50vh;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+}
+
+
+#login-svg {
+  width: 600px;
+  height: 600px;
+  position: absolute;
+  top: 13%;
+  bottom: 50%;
+  left: 33%;
+}
+
+svg #login-path {
+  stroke-dasharray:861.7877197265625px;
+  stroke-dashoffset: 861.7877197265625px;
+  animation-name: draw;
+  animation-duration: 5s;
+  animation-fill-mode: forwards; 
+  animation-iteration-count: 1; 
+  animation-timing-function: linear;
+}
+
+@keyframes draw {
+to {
+  stroke-dashoffset: 0;
+}
 }

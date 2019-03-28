@@ -19,6 +19,14 @@
     text-align: right;
 }
 
+.logo {
+    float: left;
+}
+
+.text {
+    float: right;
+}
+
 .toggle {
     color: rgb(255, 209, 2);
     font-family: Arial, Helvetica, sans-serif;
@@ -32,6 +40,12 @@
 
 #demo {
     width: 60%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.carousel-item {
+    width: 100%;
     height: auto;
 }
 
@@ -132,6 +146,27 @@ hr {
 
 #fullDuration {
     display: inline-block;
+}
+
+svg #path123 {
+      stroke-dasharray: 861.7877197265625px;
+      stroke-dashoffset: 861.7877197265625px;
+      animation-name: draw;
+      animation-duration: 3s;
+      animation-fill-mode: forwards; 
+      animation-iteration-count: 1; 
+      animation-timing-function: linear;
+    }
+  
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+#line {
+    fill: aqua !important;
+    stroke: aqua !important;
 }
 
 
