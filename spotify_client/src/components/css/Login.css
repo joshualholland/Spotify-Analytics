@@ -8,11 +8,13 @@
 
 .login-button {
   size: 700px;
-  background-color: #1DB954;
+  background: linear-gradient(to right, #10ffccff, #ff00d4ff);
+  font-family: sans-serif;
+  font-weight: bold;
   border-radius: 15px;
   position: absolute;
   top: 85%;
-  left: 50%;
+  left: 45%;
 }
 
 

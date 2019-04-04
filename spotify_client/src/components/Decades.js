@@ -91,7 +91,7 @@ export default class Decades extends Component {
         }
 
         return (
-            <div className='decade-chart'>
+            <div className='decade-chart col-md-3'>
                 <CanvasJSChart options={options} />
             </div>
         )

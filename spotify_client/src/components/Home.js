@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './css/Home.css';
 import SpotifyWebApi from 'spotify-web-api-js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlayCircle, faPauseCircle } from '@fortawesome/free-regular-svg-icons';
 
-import Carousel from './Carousel';
+import Genre from './Genre';
+import Decades from './Decades';
+import Other from './Other';
+
 import Logo from './svg/Logo';
 import Text from './svg/Text';
+import Play from './svg/Play';
+import Pause from './svg/Pause';
+import Next from './svg/Next';
+import Previous from './svg/Previous';
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -26,8 +30,6 @@ class Home extends Component {
                 name: 'Not Checked',
                 albumArt: '',
                 artist: null,
-                progress: null,
-                duration: null,
             },
             me: {
                 display_name: null,
@@ -60,16 +62,8 @@ class Home extends Component {
                     name: song.item.name,
                     albumArt: song.item.album.images[0].url,
                     artist: song.item.artists[0].name,
-                    duration: msToMinutesAndSeconds(song.item.duration_ms),
-                    progress: msToMinutesAndSeconds(song.progress_ms)
                 }
             });
-
-            function msToMinutesAndSeconds(millis) {
-                var minutes = Math.floor(millis / 60000);
-                var seconds = ((millis % 60000) / 1000).toFixed(0);
-                return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-            }
 
             let me = await spotifyApi.getMe();
             this.setState({
@@ -79,10 +73,6 @@ class Home extends Component {
                     followers: me.followers.total
                 }
             });
-
-            var path = document.querySelector("svg path");
-            var total_length = path.getTotalLength();
-            console.log(total_length)
         } catch (e) {
             console.log(e)
         }
@@ -110,25 +100,42 @@ class Home extends Component {
         }
     }
 
+    async nextTrack() {
+        try {
+            await spotifyApi.skipToNext();
+            setTimeout(function () { window.location.reload() }, 2000);
+        } catch (e) { console.log(e) }
+    }
+
+    async previousTrack() {
+        try {
+            await spotifyApi.skipToPrevious();
+            setTimeout(function () { window.location.reload() }, 2000);
+        } catch (e) { console.log(e) }
+    }
+
     switchButtons() {
         if (this.state.isPaused === false) {
-            return (<FontAwesomeIcon type='button' id='play' icon={faPauseCircle} size={"lg"} color={'white'} onClick={e => this.pauseTrack()} />)
+            return (<div id='pauseSpotify' className='m-3' style={{ display: 'inline-block' }} onClick={e => this.pauseTrack()}><Pause /></div>)
         } else if (this.state.isPaused === true) {
-            return (<FontAwesomeIcon type='button' id='play' icon={faPlayCircle} size={"lg"} color={'white'} onClick={e => this.playTrack()} />)
+            return (<div id='playSpotify' className='m-3' style={{ display: 'inline-block' }} onClick={e => this.playTrack()}><Play /></div>)
         }
     }
 
     render() {
         return (
             <div className="Home">
-            <Logo />
-            {/* <Text /> */}
-                {/* <ul className='genre-button list-unstyled text-center'>
-                    <Link to='/home?:anything' className='toggle mr-4 active'>Analytics</Link>
-                    <Link to='/visualize' className='toggle ml-4'>Visualizer</Link>
-                </ul> */}
-                <div className='analytics text-center'>
-                    <Carousel />
+                <div className='svg-top'>
+                    <Logo />
+                    <Text />
+                </div>
+
+                <div className='analytics text-center mt-5'>
+                    <h4 className='mr-auto' id='charts-title'>Your Analysis</h4>
+                    <hr></hr>
+                    <Genre />
+                    <Decades />
+                    <Other />
                 </div>
                 <footer className='footer'>
                     <div className='song-container'>
@@ -141,18 +148,11 @@ class Home extends Component {
                         </div>
                     </div>
                     <div id='wrapper'>
-                        <audio id='mytrack'>
-
-                        </audio>
                         <div id='buttons' className='text-center'>
+                            <span onClick={e => this.previousTrack()}><Previous /></span>
                             {this.switchButtons()}
+                            <span onClick={e => this.nextTrack()}><Next /></span>
                         </div>
-                        <span className='text-white' id='currentTime'>{this.state.nowPlaying.progress}</span>
-                        <div id='defaultbar'>
-                            <div id='progressbar'>
-                            </div>
-                        </div>
-                        <span className='text-white' id='fullDuration'>{this.state.nowPlaying.duration}</span>
                     </div>
                     <div className='me'>
                         <img className='me-pic' alt='profile' src={this.state.me.profile_img} />

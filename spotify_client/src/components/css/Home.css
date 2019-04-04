@@ -7,6 +7,14 @@
 
 .me {
     float: right;
+    margin-top: 8px;
+    text-align: right;
+}
+
+.svg-top {
+    width: 100%;
+    height: 100px;
+    vertical-align: text-top;
 }
 
 .me-pic {
@@ -20,43 +28,24 @@
 }
 
 .logo {
-    float: left;
+    margin-right: 0;
+    display: inline-block;
 }
 
 .text {
     float: right;
 }
 
-.toggle {
-    color: rgb(255, 209, 2);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 40px; 
-    display: inline-block;
-}
-
-.active, .toggle:hover {
-    color: rgb(255, 209, 2);
-}
-
-#demo {
-    width: 60%;
-    height: auto;
-    margin: 0 auto;
-}
-
-.carousel-item {
-    width: 100%;
-    height: auto;
+#charts-title {
+    color: #ff00d4;
 }
 
 .genre-chart {
-    width: 100%;
-    height: 100%;
+    display: inline-block;
 }
 
 .decade-chart {
-    width: 100%;
-    height: 100%;
+    display: inline-block;
 }
 
 footer {
@@ -69,8 +58,6 @@ footer {
 
 .song-container {
     float: left;
-    width: 300px;
-    margin-right: 300px;
 }
 
 .song-img {
@@ -89,17 +76,17 @@ footer {
 }
 
 .Other {
-    width: 100%;
-    height: 100%;
+    display: inline-block;
 }
 
 .card {
     background-color: #212529;
     display: inline-block;
+    height: 100%;
 }
 
 hr {
-    background-color: rgb(255, 209, 2);
+    background-color: aqua;
 }
 
 .other-items {
@@ -135,9 +122,9 @@ hr {
 
 #play {
     background-color: #212529;
-    border: none;
-    height: 32px;
-    widows: 32px;
+    border-style: none;
+    height: 62px;
+    width: 62px;
 }
 
 #currentTime {

@@ -44,10 +44,10 @@ export default class Other extends Component {
 
     render() {
         return (
-            <div className='Other'>
+            <div className='Other col-md-3'>
                 <div className='card'>
                     <div className='card-body'>
-                        <h3 className='card-title text-white'>Other Stats</h3>
+                        <h3 className='card-title' style={{color: '#ff00d4'}}>Other Stats</h3>
                         <hr />
                         <ul className='list-unstyled text-left'>
                             <li className='other-items'>Mainstreamness: {this.state.popularity}%</li>
