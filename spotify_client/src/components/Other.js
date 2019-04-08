@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
-
+import './css/Other.css';
 const spotifyApi = new SpotifyWebApi();
 
 export default class Other extends Component {
@@ -44,19 +44,16 @@ export default class Other extends Component {
 
     render() {
         return (
-            <div className='Other col-md-3'>
-                <div className='card'>
-                    <div className='card-body'>
-                        <h3 className='card-title' style={{color: '#ff00d4'}}>Other Stats</h3>
-                        <hr />
-                        <ul className='list-unstyled text-left'>
-                            <li className='other-items'>Mainstreamness: {this.state.popularity}%</li>
-                            <li className='other-items'>Playlists Followed: {this.state.playlists}</li>
-                            <li className='other-items'>Most listened to Artist: {this.state.main}</li>
-                            <li className='other-items'>Most listened to Track: {this.state.top}</li>
-                        </ul>
-                    </div>
+            <div className='Other'>
+                <div className='other-head text-center'>
+                    <h3 id='breakdown'>Breakdown</h3>
                 </div>
+                <ul className='list-unstyled text-left'>
+                    <li className='other-items'>Mainstreamness: {this.state.popularity}%</li>
+                    <li className='other-items'>Playlists Followed: {this.state.playlists}</li>
+                    <li className='other-items'>Most listened to Artist: {this.state.main}</li>
+                    <li className='other-items'>Most listened to Track: {this.state.top}</li>
+                </ul>
             </div>
         )
     }

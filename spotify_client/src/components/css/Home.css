@@ -1,6 +1,6 @@
 .Home {
     background: linear-gradient(to bottom right,#6b5b95, black);
-    height: 100vh;
+    height: 100%;
     max-width: 100%;
     margin: 0;
 }
@@ -13,8 +13,13 @@
 
 .svg-top {
     width: 100%;
-    height: 100px;
-    vertical-align: text-top;
+    height: 100vh;
+}
+
+.scroll {
+    position: absolute;
+    bottom: 14%;
+    left: 50%;
 }
 
 .me-pic {
@@ -27,9 +32,13 @@
     text-align: right;
 }
 
-.logo {
-    margin-right: 0;
-    display: inline-block;
+#home-logo {
+    width: 600px;
+    height: 600px;
+    position: absolute;
+    top: 13%;
+    bottom: 50%;
+    left: 33%;
 }
 
 .text {
@@ -40,18 +49,11 @@
     color: #ff00d4;
 }
 
-.genre-chart {
-    display: inline-block;
-}
-
-.decade-chart {
-    display: inline-block;
-}
 
 footer {
     background-color: #212529;
     bottom: 0;
-    position: absolute;
+    position: fixed;
     height: 7em;
     width: 100%;
 }
@@ -103,21 +105,6 @@ hr {
     width: 740px;
     margin: 10px auto;
     display: inline-block;
-}
-
-#defaultbar {
-    width: 640px;
-    position: relative;
-    height: 10px;
-    background-color: #313131;
-    display: inline-block;
-}
-
-#progressbar {
-    position: absolute;
-    height: 10px;
-    background-color: white;
-    width: 0px;
 }
 
 #play {

@@ -12,6 +12,9 @@ import Play from './svg/Play';
 import Pause from './svg/Pause';
 import Next from './svg/Next';
 import Previous from './svg/Previous';
+import Scroll from './svg/Scroll';
+
+import { Link, animateScroll } from 'react-scroll';
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -128,11 +131,19 @@ class Home extends Component {
                 <div className='svg-top'>
                     <Logo />
                     <Text />
+                    <div className='scroll'>
+                        <Link
+                            to='genre-contain'
+                            spy={true}
+                            smooth={true}
+                            offset={-70}
+                            duration={500}
+                        ><span><Scroll /></span> </Link>
+                    </div>
                 </div>
 
-                <div className='analytics text-center mt-5'>
-                    <h4 className='mr-auto' id='charts-title'>Your Analysis</h4>
-                    <hr></hr>
+                <div className='analytics'>
+
                     <Genre />
                     <Decades />
                     <Other />
