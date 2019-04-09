@@ -101,7 +101,7 @@ export default class Decades extends Component {
                 </div>
                 <div className='scroll-decade'>
                         <Link
-                            to='Other'
+                            to='scroll-other'
                             spy={true}
                             smooth={true}
                             offset={-70}

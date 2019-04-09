@@ -35,9 +35,6 @@
 #home-logo {
     width: 600px;
     height: 600px;
-    position: absolute;
-    top: 13%;
-    left: 33%;
 }
 
 .text {
@@ -121,7 +118,5 @@ svg #path123 {
     #home-logo {
         width: 300px !important;
         height: auto;
-        top: 25%;
-        left: 14%;
     }
 }

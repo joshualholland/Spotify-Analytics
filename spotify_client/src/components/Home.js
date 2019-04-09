@@ -162,7 +162,7 @@ class Home extends Component {
                             <span onClick={e => this.nextTrack()}><Next /></span>
                         </div>
                     </div>
-                    <div className='me'>
+                    <div className='me mr-4'>
                         <img className='me-pic' alt='profile' src={this.state.me.profile_img} />
                         <div className='me-text'>
                             <p className='text-white'>{this.state.me.display_name}</p>
