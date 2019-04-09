@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import CanvasJSReact from '../utils/canvasjs.react';
 import SpotifyWebApi from 'spotify-web-api-js';
-import Scroll from './svg/Scroll';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSortDown } from '@fortawesome/free-solid-svg-icons';
 import './css/Genre.css';
 import { Link } from 'react-scroll';
 
@@ -124,7 +125,7 @@ export default class Genre extends Component {
                             smooth={true}
                             offset={-70}
                             duration={500}
-                        ><span><Scroll /></span> </Link>
+                        ><span><FontAwesomeIcon icon={faSortDown} size={"lg"} color={"white"} /></span> </Link>
                     </div>
             </div>
         )

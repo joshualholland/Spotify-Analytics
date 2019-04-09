@@ -21,3 +21,15 @@
 .results {
     color: #ff00d4;
 }
+
+.scroll-other {
+    position: relative;
+    top: 25%;
+    left: 50%;
+}
+
+@media only screen and (max-width: 414px) {
+    .breakdown-items {
+        font-size: 25px;
+    }
+}

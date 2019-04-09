@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import './css/Home.css';
 import SpotifyWebApi from 'spotify-web-api-js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSortDown } from '@fortawesome/free-solid-svg-icons'
 
 import Genre from './Genre';
 import Decades from './Decades';
 import Other from './Other';
 
 import Logo from './svg/Logo';
-import Text from './svg/Text';
 import Play from './svg/Play';
 import Pause from './svg/Pause';
 import Next from './svg/Next';
 import Previous from './svg/Previous';
-import Scroll from './svg/Scroll';
 
 import { Link } from 'react-scroll';
 
@@ -128,7 +128,6 @@ class Home extends Component {
             <div className="Home">
                 <div className='svg-top'>
                     <Logo />
-                    <Text />
                     <div className='scroll'>
                         <Link
                             to='genre-contain'
@@ -136,7 +135,7 @@ class Home extends Component {
                             smooth={true}
                             offset={-70}
                             duration={500}
-                        ><span><Scroll /></span> </Link>
+                        ><span><FontAwesomeIcon icon={faSortDown} size={"lg"} color={"white"} /></span> </Link>
                     </div>
                 </div>
 

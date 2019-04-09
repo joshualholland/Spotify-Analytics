@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import './css/Other.css';
+import { animateScroll as scroll } from 'react-scroll';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSortUp } from '@fortawesome/free-solid-svg-icons'
+
 const spotifyApi = new SpotifyWebApi();
 
 export default class Other extends Component {
@@ -42,6 +46,10 @@ export default class Other extends Component {
         })
     };
 
+    scrollToTop() {
+        scroll.scrollToTop();
+    }
+
     render() {
         return (
             <div className='Other'>
@@ -54,8 +62,10 @@ export default class Other extends Component {
                     <h3 className='breakdown-items mt-5'>Most listened to Artist: <span className='results'>{this.state.main}</span></h3>
                     <h3 className='breakdown-items mt-5'>Most listened to Track: <span className='results'>{this.state.top}</span></h3>
                 </div>
-
-            </div>
+                <div className='scroll-other'>
+                    <span onClick={e => this.scrollToTop()}><FontAwesomeIcon icon={faSortUp} size={"lg"} color={"white"} /></span>
+                </div>
+            </div >
         )
     }
 }

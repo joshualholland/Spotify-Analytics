@@ -37,7 +37,6 @@
     height: 600px;
     position: absolute;
     top: 13%;
-    bottom: 50%;
     left: 33%;
 }
 
@@ -78,9 +77,8 @@ footer {
 }
 
 #wrapper {
-    width: 740px;
-    margin: 10px auto;
-    display: inline-block;
+    width: 100%;
+    position: absolute;
 }
 
 #play {
@@ -119,7 +117,7 @@ svg #path123 {
     stroke: aqua !important;
 }
 
-@media only screen and (max-width: 414) {
+@media only screen and (max-width: 414px) {
     #home-logo {
         width: 300px !important;
         height: auto;
