@@ -6,9 +6,17 @@ var cookieParser = require('cookie-parser');
 
 require('dotenv').config();
 
-var client_id = process.env.CLIENT_ID;
-var client_secret = process.env.CLIENT_SECRET;
-var redirect_uri = 'http://localhost:8888/callback';
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
+let redirect_uri = process.env.REDIRECT_URI || 'http://localhost:8888/callback';
+let frontend_uri = process.env.FRONTEND_URI || 'http://localhost:3000/home/#';
+const PORT = process.env.PORT || 8888;
+
+if (process.env.NODE_ENV !== 'production') {
+  REDIRECT_URI = 'http://localhost:8888/callback';
+  FRONTEND_URI = 'http://localhost:3000/home/#';
+}
+
 
 /**
  * Generates a random string containing numbers and letters
@@ -97,7 +105,7 @@ app.get('/callback', function (req, res) {
         });
 
         // we can also pass the token to the browser to make requests from there
-        res.redirect('http://localhost:3000/home/#' +
+        res.redirect(frontend_uri +
           querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token
@@ -136,5 +144,5 @@ app.get('/refresh_token', function (req, res) {
   });
 });
 
-console.log('Listening on 8888');
-app.listen(8888);
+console.log(`Listening on ${PORT}`);
+app.listen(PORT);

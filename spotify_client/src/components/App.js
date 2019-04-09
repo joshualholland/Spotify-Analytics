@@ -12,7 +12,6 @@ export default class App extends Component {
                 <Switch>
                     <Route exact path='/' component={Login} />
                     <Route exact path='/home/:anything?' component={Home} />
-                    <Route exact path='/visualize' component={Visualizer} />
                 </Switch>
             </Router>
         )
