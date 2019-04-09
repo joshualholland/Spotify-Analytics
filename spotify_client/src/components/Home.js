@@ -14,7 +14,7 @@ import Next from './svg/Next';
 import Previous from './svg/Previous';
 import Scroll from './svg/Scroll';
 
-import { Link, animateScroll } from 'react-scroll';
+import { Link } from 'react-scroll';
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -52,14 +52,12 @@ class Home extends Component {
             hashParams[e[1]] = decodeURIComponent(e[2]);
             e = r.exec(q);
         }
-        console.log(hashParams)
         return hashParams;
     }
 
     async componentDidMount() {
         try {
             let song = await spotifyApi.getMyCurrentPlaybackState();
-            console.log(song)
             this.setState({
                 nowPlaying: {
                     name: song.item.name,

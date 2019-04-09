@@ -3,7 +3,7 @@ import CanvasJSReact from '../utils/canvasjs.react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import Scroll from './svg/Scroll';
 import './css/Genre.css';
-import { Link, animateScroll } from 'react-scroll';
+import { Link } from 'react-scroll';
 
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -114,7 +114,7 @@ export default class Genre extends Component {
         }
         return (
             <div className='genre'>
-                <div className='col-md-8' id='genre-contain'>
+                <div className='col-md-8 col-sm-10' id='genre-contain'>
                     <CanvasJSChart options={options} />
                 </div>
                 <div className='scroll-genre'>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CanvasJSReact from '../utils/canvasjs.react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import Scroll from './svg/Scroll';
-import { Link, animateScroll } from 'react-scroll';
+import { Link } from 'react-scroll';
 import './css/Decade.css';
 
 
@@ -95,7 +95,7 @@ export default class Decades extends Component {
 
         return (
             <div className='decade'>
-                <div className='decade-chart col-md-8'>
+                <div className='decade-chart col-md-8 col-sm-10'>
                     <CanvasJSChart options={options} />
                 </div>
                 <div className='scroll-decade'>

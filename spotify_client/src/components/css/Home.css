@@ -77,30 +77,6 @@ footer {
     color: white;
 }
 
-.Other {
-    display: inline-block;
-}
-
-.card {
-    background-color: #212529;
-    display: inline-block;
-    height: 100%;
-}
-
-hr {
-    background-color: aqua;
-}
-
-.other-items {
-    color: white;
-}
-
-.other-items::before {
-    content: "\2023";
-    color: #6b5b95;
-    margin-right: 1em;
-}
-
 #wrapper {
     width: 740px;
     margin: 10px auto;
@@ -143,9 +119,11 @@ svg #path123 {
     stroke: aqua !important;
 }
 
-
-@media only screen and (max-width: 1328) {
-    .song-container {
-        margin-right: 100px;
+@media only screen and (max-width: 414) {
+    #home-logo {
+        width: 300px !important;
+        height: auto;
+        top: 25%;
+        left: 14%;
     }
-} 
+}

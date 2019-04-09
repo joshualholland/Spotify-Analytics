@@ -48,12 +48,13 @@ export default class Other extends Component {
                 <div className='other-head text-center'>
                     <h3 id='breakdown'>Breakdown</h3>
                 </div>
-                <ul className='list-unstyled text-left'>
-                    <li className='other-items'>Mainstreamness: {this.state.popularity}%</li>
-                    <li className='other-items'>Playlists Followed: {this.state.playlists}</li>
-                    <li className='other-items'>Most listened to Artist: {this.state.main}</li>
-                    <li className='other-items'>Most listened to Track: {this.state.top}</li>
-                </ul>
+                <div className='text-center'>
+                    <h3 className='breakdown-items mt-5'>Mainstreamness: <span className='results'>{this.state.popularity}%</span></h3>
+                    <h3 className='breakdown-items mt-5'>Playlists Followed: <span className='results'>{this.state.playlists}</span></h3>
+                    <h3 className='breakdown-items mt-5'>Most listened to Artist: <span className='results'>{this.state.main}</span></h3>
+                    <h3 className='breakdown-items mt-5'>Most listened to Track: <span className='results'>{this.state.top}</span></h3>
+                </div>
+
             </div>
         )
     }

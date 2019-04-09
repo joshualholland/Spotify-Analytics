@@ -5,10 +5,6 @@ import LoginLogo from './svg/LoginLogo';
 
 
 export default class Login extends Component {
-  constructor() {
-    super()
-  }
-
   componentDidMount() {
     var path = document.querySelector("svg path");
     var total_length = path.getTotalLength();
@@ -25,7 +21,5 @@ export default class Login extends Component {
       </div>
     )
   }
-
-
 }
 
