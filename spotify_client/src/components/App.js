@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Login from './Login';
 import Home from './Home';
-import Visualizer from './Visualizer';
 
 export default class App extends Component {
     render() {

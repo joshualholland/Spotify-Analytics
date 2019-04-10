@@ -13,8 +13,8 @@ let frontend_uri = process.env.FRONTEND_URI || 'http://localhost:3000/home/#';
 const PORT = process.env.PORT || 8888;
 
 if (process.env.NODE_ENV !== 'production') {
-  REDIRECT_URI = 'http://localhost:8888/callback';
-  FRONTEND_URI = 'http://localhost:3000/home/#';
+  redirect_uri = 'http://localhost:8888/callback';
+  frontend_uri = 'http://localhost:3000/home/#';
 }
 
 

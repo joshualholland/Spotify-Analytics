@@ -15,7 +15,7 @@ export default class Login extends Component {
     return (
       <div className="Login">
         <LoginLogo id='login-logo' />
-        <a href='http://localhost:8888'>
+        <a href={'https://synesthesiaspotify.herokuapp.com/callback'}>
           <button className='btn login-button text-white'>Login with Spotify</button>
         </a>
       </div>
